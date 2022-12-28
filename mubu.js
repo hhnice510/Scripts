@@ -11,7 +11,7 @@ updated time 2022-10-04
 [rewrite_local]
 
 # 幕布解锁订阅
-^https?:\/\/api2\.mubu\.com\/v3\/api\/user\/current_user url script-response-body mubu.js
+^https?:\/\/api2\.mubu\.com\/v3\/api\/user\/current_user url script-response-body https://raw.githubusercontent.com/hhnice510/Scripts/main/mubu.js
 
 [mitm]
 
