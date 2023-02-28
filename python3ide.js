@@ -10,7 +10,7 @@ by nice
 [rewrite_local]
 
 # Python3IDE解锁订阅
-^https?:\/\/api\.revenuecat\.com\/v1\/subscribers\/\$\S{48} url script-response-body python3ide.js
+^https?:\/\/api\.revenuecat\.com\/v1\/subscribers\/\$\S{48} url script-response-body https://raw.githubusercontent.com/hhnice510/Scripts/main/python3ide.js
 
 [mitm]
 
