@@ -128,7 +128,7 @@ async function taskreceive(id) {
 async function usersign() {
   body = await sign()
   return new Promise(resolve => {
-    $.post(taskPostUrl("dwSignInfo", body), (err, resp, data) => {
+    $.post(taskPostUrl("dwSign", body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${err}`)
