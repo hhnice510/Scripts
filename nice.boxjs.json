@@ -1,0 +1,37 @@
+{
+    "id": "hhnice.app.sub",
+    "name": "hhnice自用脚本",
+    "author": "@hhnice",
+    "icon": "https://avatars.githubusercontent.com/u/65580234?v=4",
+    "repo": "https://github.com/hhnice510/Scripts",
+    "apps": [
+      {
+        "id": "bingTask",
+        "name": "bingTask",
+        "keys": [
+          "bingCookie"
+        ],
+        "descs_html": [
+          "多个用英文逗号(,)分开"
+        ],
+        "settings": [
+          {
+            "id": "bingCookie",
+            "name": "CK列表",
+            "val": "",
+            "type": "textarea",
+            "autoGrow": true,
+            "rows": 8,
+            "desc": "CK 列表 "
+          }
+        ],
+        "icons": [
+          "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png",
+          "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Microsoft.png"
+        ],
+        "author": "@hhnice",
+        "repo": "https://github.com/hhnice510/Scripts",
+        "script": "https://github.com/hhnice510/Scripts"
+      }
+    ]
+  }
