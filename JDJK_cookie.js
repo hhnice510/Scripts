@@ -47,7 +47,7 @@ function getCache() {
 
 function GetCookie() {
   try {
-    if ($request.headers && $request.url.indexOf("GetJDUserInfoUnion") > -1) {
+    if ($request.headers && $request.url.indexOf("yyjdfromflag=login") > -1) {
       var CV = $request.headers["Cookie"] || $request.headers["cookie"];
       if (CV.match(/(pt_key=.+?pt_pin=.+?;|pt_pin=.+?pt_key=.+?;)/)) {
         var CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/);
