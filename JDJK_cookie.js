@@ -23,15 +23,15 @@ hostname = m.healthjd.com
 ===================Quantumult X=====================
 [rewrite_local]
 # 获取多账号京东Cookie
-https:\/\/m\.healthjd\.com\/s\/my\?yyjdfromflag=login url script-request-header JD_extra_cookie.js
+https:\/\/m\.healthjd\.com\/s\/my\?yyjdfromflag=login url script-request-header JDJK_cookie.js
 
 ===================Loon===================
 [Script]
-http-request https:\/\/m\.healthjd\.com\/s\/my\?yyjdfromflag=login script-path=JD_extra_cookie.js, tag=获取多账号京东Cookie
+http-request https:\/\/m\.healthjd\.com\/s\/my\?yyjdfromflag=login script-path=JDJK_cookie.js, tag=获取多账号京东Cookie
 
 ===================Surge===================
 [Script]
-获取多账号京东Cookie = type=http-request,pattern=^https:\/\/m\.healthjd\.com\/s\/my\?yyjdfromflag=login,requires-body=1,max-size=0,script-path=JD_extra_cookie.js,script-update-interval=0
+获取多账号京东Cookie = type=http-request,pattern=^https:\/\/m\.healthjd\.com\/s\/my\?yyjdfromflag=login,requires-body=1,max-size=0,script-path=JDJK_cookie.js,script-update-interval=0
  */
 
 const APIKey = "CookiesJD";
