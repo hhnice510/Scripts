@@ -48,68 +48,59 @@ function getCache() {
 function GetCookie() {
   try {
     if ($request.headers && $request.url.indexOf("yyjdfromflag=login") > -1) {
-        if ($request.headers["Cookie"] || $request.headers["cookie"]) {
-            var CV = $request.headers["Cookie"] || $request.headers["cookie"];
-            if (CV.match(/(pt_key=.+?pt_pin=.+?;|pt_pin=.+?pt_key=.+?;)/)) {
-                var CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/);
-                var UserName = CookieValue.match(/pt_pin=([^; ]+)(?=;?)/)[1];
-                var DecodeName = decodeURIComponent(UserName);
-                var CookiesData = getCache();
-                var updateCookiesData = [...CookiesData];
-                var updateIndex;
-                var CookieName = "【账号】";
-                var updateCodkie = CookiesData.find((item, index) => {
-                var ck = item.cookie;
-                var Account = ck
-                    ? ck.match(/pt_pin=.+?;/)
-                    ? ck.match(/pt_pin=([^; ]+)(?=;?)/)[1]
-                    : null
-                    : null;
-                const verify = UserName === Account;
-                if (verify) {
-                    updateIndex = index;
-                }
-                return verify;
-                });
-                var tipPrefix = "";
-                if (updateCodkie) {
-                updateCookiesData[updateIndex].cookie = CookieValue;
-                CookieName = `【账号${updateIndex + 1}】`;
-                tipPrefix = "更新京东";
-                } else {
-                updateCookiesData.push({
-                    userName: DecodeName,
-                    cookie: CookieValue,
-                });
-                CookieName = "【账号" + updateCookiesData.length + "】";
-                tipPrefix = "首次写入京东";
-                }
-                const cacheValue = JSON.stringify(updateCookiesData, null, "\t");
-                $.write(cacheValue, CacheKey);
-                $.notify(
-                "用户名: " + DecodeName,
-                "",
-                tipPrefix + CookieName + "Cookie成功 🎉"
-                );
-            } else {
-                $.notify("写入京东Cookie失败", "", "请查看脚本内说明, 登录网页获取 ‼️");
-            }
-            $.done();
-            return;
+      var CV = $request.headers["Cookie"] || $request.headers["cookie"];
+      if (CV.match(/(pt_key=.+?pt_pin=.+?;|pt_pin=.+?pt_key=.+?;)/)) {
+        var CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/);
+        var UserName = CookieValue.match(/pt_pin=([^; ]+)(?=;?)/)[1];
+        var DecodeName = decodeURIComponent(UserName);
+        var CookiesData = getCache();
+        var updateCookiesData = [...CookiesData];
+        var updateIndex;
+        var CookieName = "【账号】";
+        var updateCodkie = CookiesData.find((item, index) => {
+          var ck = item.cookie;
+          var Account = ck
+            ? ck.match(/pt_pin=.+?;/)
+              ? ck.match(/pt_pin=([^; ]+)(?=;?)/)[1]
+              : null
+            : null;
+          const verify = UserName === Account;
+          if (verify) {
+            updateIndex = index;
+          }
+          return verify;
+        });
+        var tipPrefix = "";
+        if (updateCodkie) {
+          updateCookiesData[updateIndex].cookie = CookieValue;
+          CookieName = `【账号${updateIndex + 1}】`;
+          tipPrefix = "更新京东";
         } else {
-            $.notify("写入京东Cookie错误", "", "请检查匹配URL是否存在Cookie !!");
-            console.log(
-                `\n写入京东Cookie错误 ‼️\n${JSON.stringify(
-                  eor
-                )}\n\n${eor}\n\n${JSON.stringify($request.headers)}\n`
-              );
+          updateCookiesData.push({
+            userName: DecodeName,
+            cookie: CookieValue,
+          });
+          CookieName = "【账号" + updateCookiesData.length + "】";
+          tipPrefix = "首次写入京东";
         }
+        const cacheValue = JSON.stringify(updateCookiesData, null, "\t");
+        $.write(cacheValue, CacheKey);
+        $.notify(
+          "用户名: " + DecodeName,
+          "",
+          tipPrefix + CookieName + "Cookie成功 🎉"
+        );
+      } else {
+        $.notify("写入京东Cookie失败", "", "请查看脚本内说明, 登录网页获取 ‼️");
+      }
+      $.done();
+      return;
     } else {
       $.notify("写入京东Cookie失败", "", "请检查匹配URL或配置内脚本类型 ‼️");
     }
   } catch (eor) {
-    //$.write("", CacheKey);
-    $.notify("写入京东Cookie失败", "", "请尝试清空历史Cookie, 请重试 ⚠️");
+    $.write("", CacheKey);
+    $.notify("写入京东Cookie失败", "", "已尝试清空历史Cookie, 请重试 ⚠️");
     console.log(
       `\n写入京东Cookie出现错误 ‼️\n${JSON.stringify(
         eor
