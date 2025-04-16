@@ -11,9 +11,9 @@ hostname = www.example.com
 
 */
 
-var body_regex = /<\/body>/gi;
+var body_regex = /<\/head>/gi;
 var body_replace_str = '<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.7.2/css/all.css" rel="stylesheet" type="text/css" />\
-<script type="text/javascript" async="async" src="https://raw.githubusercontent.com/hhnice510/Scripts/refs/heads/main/nice.js"></script></body>\
+<script type="text/javascript" async="async" src="https://raw.githubusercontent.com/hhnice510/Scripts/refs/heads/main/nice.js"></script></head>\
 ';
 
 
