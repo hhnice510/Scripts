@@ -12,7 +12,7 @@ hostname = www.example.com
 */
 
 var body_regex = /<\/head>/gi;
-var body_replace_str = '<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.7.2/css/all.css" rel="stylesheet">\
+var body_replace_str = '<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" rel="stylesheet">\
 <script src="https://cdn.jsdelivr.net/gh/hhnice510/Scripts/nice.js"></script></head>\
 ';
 
