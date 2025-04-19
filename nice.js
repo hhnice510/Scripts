@@ -2,12 +2,14 @@
 //<script src="https://raw.githubusercontent.com/hhnice510/Scripts/refs/heads/main/nice.js"></script> 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const button = document.createElement('button');
-    button.id = 'suspendedButton';
-    button.innerHTML = '<i class="fas fa-language"></i>';
-    button.setAttribute('title', '语言切换');
+    const nice_btn = document.createElement("button");
+    nice_btn.id = "suspendedButton";
+    nice_btn.innerHTML = '<i class="fa-solid fa-bug"></i>';
+    nice_btn.setAttribute("title", "NiceBox");
 
-    button.setAttribute('style', `
+    nice_btn.setAttribute(
+        "style",
+        `
         position: fixed;
         top: 50%;
         right: 0;
@@ -27,9 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         z-index: 9999;
         transition: all 0.2s ease;
         touch-action: none;
-    `);
+    `
+    );
 
-    document.body.appendChild(button);
+    document.body.appendChild(nice_btn);
 
     // 状态变量
     let isDragging = false;
@@ -42,46 +45,46 @@ document.addEventListener('DOMContentLoaded', function () {
     let autoHideTimer = null;
 
     function prepareForDrag() {
-        const rect = button.getBoundingClientRect();
-        button.style.top = `${rect.top}px`;
-        button.style.left = `${rect.left}px`;
-        button.style.right = 'auto';
-        button.style.transform = 'none';
+        const rect = nice_btn.getBoundingClientRect();
+        nice_btn.style.top = `${rect.top}px`;
+        nice_btn.style.left = `${rect.left}px`;
+        nice_btn.style.right = "auto";
+        nice_btn.style.transform = "none";
     }
 
     function startDrag(clientY, clientX) {
         clearTimeout(autoHideTimer);
         prepareForDrag();
         isDragging = true;
-        offsetY = clientY - button.getBoundingClientRect().top;
+        offsetY = clientY - nice_btn.getBoundingClientRect().top;
         startX = clientX;
         startY = clientY;
-        button.style.transition = 'none';
-        button.style.cursor = 'grabbing';
+        nice_btn.style.transition = "none";
+        nice_btn.style.cursor = "grabbing";
         restoreButton(); // 拖动时还原
     }
 
     function doDrag(clientY) {
-        const buttonHeight = button.offsetHeight;
+        const buttonHeight = nice_btn.offsetHeight;
         const maxTop = window.innerHeight - buttonHeight;
         let newTop = clientY - offsetY;
         newTop = Math.max(0, Math.min(newTop, maxTop));
-        button.style.top = `${newTop}px`;
+        nice_btn.style.top = `${newTop}px`;
     }
 
     function endDrag(clientX) {
         isDragging = false;
-        button.style.cursor = 'grab';
+        nice_btn.style.cursor = "grab";
 
-        const buttonRect = button.getBoundingClientRect();
+        const buttonRect = nice_btn.getBoundingClientRect();
         const middleX = window.innerWidth / 2;
 
         const currentTop = buttonRect.top;
-        button.style.top = `${currentTop}px`;
+        nice_btn.style.top = `${currentTop}px`;
 
         isLeft = clientX < middleX;
         const start = buttonRect.left;
-        const end = isLeft ? 0 : window.innerWidth - button.offsetWidth;
+        const end = isLeft ? 0 : window.innerWidth - nice_btn.offsetWidth;
 
         const startTime = performance.now();
         const duration = 300;
@@ -92,15 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const ease = 1 - Math.pow(1 - progress, 3);
             const currentX = start + (end - start) * ease;
 
-            button.style.left = `${currentX}px`;
-            button.style.right = 'auto';
-            button.style.transform = 'none';
+            nice_btn.style.left = `${currentX}px`;
+            nice_btn.style.right = "auto";
+            nice_btn.style.transform = "none";
 
             // 设置圆角
             if (isLeft) {
-                button.style.borderRadius = '0 24px 24px 0';
+                nice_btn.style.borderRadius = "0 24px 24px 0";
             } else {
-                button.style.borderRadius = '24px 0 0 24px';
+                nice_btn.style.borderRadius = "24px 0 0 24px";
             }
 
             if (progress < 1) {
@@ -115,55 +118,55 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function bounceEffect() {
-        button.style.transition = "transform 0.2s ease";
-        button.style.transform = "scale(1.05)";
+        nice_btn.style.transition = "transform 0.2s ease";
+        nice_btn.style.transform = "scale(1.05)";
         setTimeout(() => {
-            button.style.transform = "scale(1)";
+            nice_btn.style.transform = "scale(1)";
         }, 200);
     }
 
     function autoHide() {
         autoHideTimer = setTimeout(() => {
             if (isLeft) {
-                button.style.transform = "translateX(-50%)";
+                nice_btn.style.transform = "translateX(-50%)";
             } else {
-                button.style.transform = "translateX(50%)";
+                nice_btn.style.transform = "translateX(50%)";
             }
         }, 2000); // 2 秒后自动半隐藏
     }
 
     function restoreButton() {
-        button.style.transform = "none";
+        nice_btn.style.transform = "none";
     }
 
     // 鼠标拖动
-    button.addEventListener('mousedown', function (e) {
+    nice_btn.addEventListener("mousedown", function (e) {
         startDrag(e.clientY, e.clientX);
         moved = false;
         e.preventDefault();
     });
 
-    document.addEventListener('mousemove', function (e) {
+    document.addEventListener("mousemove", function (e) {
         if (isDragging) {
             doDrag(e.clientY);
             if (Math.abs(e.clientY - startY) > 5) moved = true;
         }
     });
 
-    document.addEventListener('mouseup', function (e) {
+    document.addEventListener("mouseup", function (e) {
         if (isDragging) {
             endDrag(e.clientX);
         }
     });
 
     // 触摸拖动
-    button.addEventListener('touchstart', function (e) {
+    nice_btn.addEventListener("touchstart", function (e) {
         const touch = e.touches[0];
         startDrag(touch.clientY, touch.clientX);
         moved = false;
     });
 
-    button.addEventListener('touchmove', function (e) {
+    nice_btn.addEventListener("touchmove", function (e) {
         if (isDragging && e.touches.length === 1) {
             const touch = e.touches[0];
             doDrag(touch.clientY);
@@ -172,37 +175,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    button.addEventListener('touchend', function () {
+    nice_btn.addEventListener("touchend", function () {
         if (isDragging) {
             endDrag(lastTouchX);
         }
     });
 
+    // 鼠标悬停或触摸时自动恢复按钮
+    nice_btn.addEventListener("mouseenter", () => {
+        clearTimeout(autoHideTimer);
+        restoreButton();
+    });
+
+    nice_btn.addEventListener("mouseleave", () => {
+        autoHide(); // 鼠标移出后再次收缩
+    });
+
+    nice_btn.addEventListener("touchstart", () => {
+        clearTimeout(autoHideTimer);
+        restoreButton();
+    });
+
+    nice_btn.addEventListener("touchend", () => {
+        autoHide();
+    });
+
     // 点击事件
-    button.addEventListener('click', function (e) {
+    nice_btn.addEventListener("click", function (e) {
         if (moved) {
             e.preventDefault();
             return;
         }
-        console.log('按钮被点击！这里可以放切换语言、弹菜单等操作');
-    });
-
-    // 鼠标悬停或触摸时自动恢复按钮
-    button.addEventListener('mouseenter', () => {
-        clearTimeout(autoHideTimer);
-        restoreButton();
-    });
-
-    button.addEventListener('mouseleave', () => {
-        autoHide(); // 鼠标移出后再次收缩
-    });
-
-    button.addEventListener('touchstart', () => {
-        clearTimeout(autoHideTimer);
-        restoreButton();
-    });
-
-    button.addEventListener('touchend', () => {
-        autoHide();
+        console.log("按钮被点击！这里可以放切换语言、弹菜单等操作");
     });
 });
