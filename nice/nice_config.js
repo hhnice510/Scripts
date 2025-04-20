@@ -4,7 +4,7 @@ QuantumultX:
 
 [rewrite_local]
 ^https?:\/\/www\.example\.com url script-response-body https://raw.githubusercontent.com/hhnice510/Scripts/refs/heads/main/nice/nice_config.js
-^https?:\/\/(www\.)?haijiao\.com url script-response-body https://raw.githubusercontent.com/hhnice510/Scripts/refs/heads/main/nice/nice_config.js
+^https?:\/\/(www\.)?haijiao\.com\/post\/details url script-response-body https://raw.githubusercontent.com/hhnice510/Scripts/refs/heads/main/nice/nice_config.js
 
 [mitm]
 hostname = www.example.com, *haijiao.com
